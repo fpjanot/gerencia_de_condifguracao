@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supermarket Inventory</title>
+</head>
+<body>
+    <h1>Supermarket Inventory</h1>
+    <form method="POST" action="/add">
+        <label for="item_name">Item Name:</label>
+        <input type="text" id="item_name" name="item_name" required>
+        <label for="item_quantity">Item Quantity:</label>
+        <input type="number" id="item_quantity" name="item_quantity" required>
+        <button type="submit">Add Item</button>
+    </form>
+    <h2>Inventory</h2>
+    <ul>
+        {% for item in inventory %}
+            <li>{{ item.name }}: {{ item.quantity }}
+                <form method="POST" action="/delete/{{ loop.index0 }}" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
