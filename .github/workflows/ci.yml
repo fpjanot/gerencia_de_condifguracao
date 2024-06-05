@@ -30,7 +30,6 @@ jobs:
       run: |
         pip install pytest
         pytest
-      continue-on-error: true  
 
   deploy:
     runs-on: ubuntu-latest
@@ -40,13 +39,22 @@ jobs:
     - name: Check out repository
       uses: actions/checkout@v2
 
-    - name: Login to Heroku Container Registry
+    - name: Install Heroku CLI
+      run: |
+        curl https://cli-assets.heroku.com/install.sh | sh
+
+    - name: Login to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        echo "$HEROKU_API_KEY" | docker login --username=_ --password-stdin registry.heroku.com
+        echo "machine api.heroku.com
+        login ${{ secrets.HEROKU_EMAIL }}
+        password ${{ secrets.HEROKU_API_KEY }}
+        machine git.heroku.com
+        login ${{ secrets.HEROKU_EMAIL }}
+        password ${{ secrets.HEROKU_API_KEY }}" > ~/.netrc
 
-    - name: Build, push and release to Heroku
+    - name: Deploy to Heroku
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
