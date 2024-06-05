@@ -7,8 +7,8 @@ app = Flask(__name__)
 inventory = []
 
 @app.route('/')
-def index():
-    return render_template('index.html', inventory=inventory)
+def hello_world():
+    return 'Hello, Continuous Integration!'
 
 @app.route('/add', methods=['POST'])
 def add_item():
@@ -30,10 +30,6 @@ def delete_item(item_index):
     if 0 <= item_index < len(inventory):
         del inventory[item_index]
     return redirect(url_for('index'))
-
-@app.route('/typography')
-def typography():
-    return render_template('typography.html')
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
