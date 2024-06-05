@@ -28,8 +28,14 @@ jobs:
 
     - name: Run tests
       run: |
+        pip install pytest
         pytest
 
-    - name: Build Docker image
+    - name: Deploy to Heroku
+      if: github.ref == 'refs/heads/main'
+      env:
+        HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
       run: |
-        docker build -t my-flask-app .
+        heroku container:login
+        heroku container:push web --app flaviaapp
+        heroku container:release web --app flaviaapp
