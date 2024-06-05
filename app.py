@@ -14,8 +14,15 @@ def index():
 def add_item():
     item_name = request.form['item_name']
     item_quantity = request.form['item_quantity']
-    if item_name and item_quantity:
-        inventory.append({'name': item_name, 'quantity': item_quantity})
+    item_price = request.form['item_price']
+    item_description = request.form['item_description']
+    if item_name and item_quantity and item_price and item_description:
+        inventory.append({
+            'name': item_name,
+            'quantity': item_quantity,
+            'price': item_price,
+            'description': item_description
+        })
     return redirect(url_for('index'))
 
 @app.route('/delete/<int:item_index>', methods=['POST'])
