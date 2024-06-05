@@ -61,4 +61,4 @@ jobs:
         heroku container:login
         heroku container:push web --app flaviaapp
         heroku container:release web --app flaviaapp
-        heroku info web --app flaviaapp -s | grep web_url | cut -d= -f2
+        heroku info flaviaapp -s | grep web_url | cut -d= -f2
