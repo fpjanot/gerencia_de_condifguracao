@@ -61,4 +61,8 @@ jobs:
         heroku container:login
         heroku container:push web --app flaviaapp
         heroku container:release web --app flaviaapp
-        heroku open web --app flaviaapp
+   
+   - name: Show app URL
+      run: |
+        APP_NAME=$(heroku apps:info -s | grep '^name=' | cut -d= -f2)
+        echo "Application deployed successfully. Visit https://$APP_NAME.herokuapp.com"
