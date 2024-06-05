@@ -31,7 +31,7 @@ jobs:
       run: |
         echo "Running tests..."
         pip install pytest
-        pytest
+        pytest tests/
 
   deploy:
     runs-on: ubuntu-latest
