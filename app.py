@@ -31,6 +31,10 @@ def delete_item(item_index):
         del inventory[item_index]
     return redirect(url_for('index'))
 
+@app.route('/typography')
+def typography():
+    return render_template('typography.html')
+
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
