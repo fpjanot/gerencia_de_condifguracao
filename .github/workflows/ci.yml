@@ -61,4 +61,4 @@ jobs:
         heroku container:login
         heroku container:push web --app flaviaapp
         heroku container:release web --app flaviaapp
-        heroku open
+        heroku open web --app flaviaapp
