@@ -7,8 +7,8 @@ app = Flask(__name__)
 inventory = []
 
 @app.route('/')
-def index():
-    return render_template('index.html', inventory=inventory)
+def hello_world():
+    return "Hello World!"
 
 @app.route('/add', methods=['POST'])
 def add_item():
